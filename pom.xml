@@ -18,6 +18,7 @@
     </properties>
 	<modules>
 		<module>learn-asm</module>
+        <module>java-basic</module>
         <module>concurrent-programming</module>
     </modules>
 
