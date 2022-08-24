@@ -32,7 +32,6 @@ public class ClassGenerate {
         cw.visitMethod(Opcodes.ACC_PUBLIC+Opcodes.ACC_ABSTRACT,
             "compareTo","(Ljava/lang/Object;)I",null,null)
         .visitEnd();
-        cw.visitEnd();
         byte[] bytes = cw.toByteArray();
 
         MyClassLoader classLoader = new MyClassLoader();
