@@ -39,4 +39,25 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+                <configuration>
+                    <archive>
+                        <!--<manifest>
+                            <addClasspath>true</addClasspath>
+                            <mainClass>com.st.Task</mainClass>
+                        </manifest>-->
+                        <manifestEntries>
+                            <Premain-Class>
+                                com.study.asm.transform.TransformClassAgent
+                            </Premain-Class>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

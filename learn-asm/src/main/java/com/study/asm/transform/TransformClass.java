@@ -24,7 +24,22 @@ public class TransformClass {
         }
     }
 
+    public static void changeClassVersionOptimization(){
+        try {
+            ClassReader cr = new ClassReader("java.lang.Math");
+            ClassWriter cw = new ClassWriter(cr,0);
+            ClassVisitor cv = new ChangeVersionAdapter(Opcodes.ASM7,cw);
+            cr.accept(cv,0);
+            byte[] b2 = cw.toByteArray();
+            FileUtils.writeByteArrayToFile(new File("/learn/learn-java/learn-asm/target/classes/com/study/asm/transform/Math.class"), b2);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void main(String[] args) {
         changeClassVersion();
+        changeClassVersionOptimization();
     }
 }
