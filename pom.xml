@@ -20,6 +20,7 @@
 		<module>learn-asm</module>
         <module>java-basic</module>
         <module>concurrent-programming</module>
+        <module>functional-programming</module>
     </modules>
 
 
