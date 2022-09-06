@@ -6,9 +6,12 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
+ * @link {https://mkyong.com/java8/java-8-method-references-double-colon-operator/}
+ *
  * Anonymous Class -> Lambda expression -> Method Reference
  *
  */
@@ -50,10 +53,31 @@ public class MethodReferenceExample {
             new Employee("zilap", 5, BigDecimal.valueOf(10000)),
             new Employee("ali", 25, BigDecimal.valueOf(2500)),
             new Employee("unknown", 99, BigDecimal.valueOf(9999)));
+
         employees.sort(comparatorProvider::compareByAge);
         System.out.println(employees);
         employees.sort(comparatorProvider::compareBySalary);
         System.out.println(employees);
+
+        String[] names = { "Barbara", "James", "Mary", "John",
+            "Patricia", "Robert", "Michael", "Linda" };
+        Arrays.sort(names,String::compareToIgnoreCase);
+        //Arrays.stream(names).map(x->x+" ").collect(Collectors.toList()).forEach(System.out::print);
+        Arrays.stream(names).map(MyStringUtil::appendBlank).collect(Collectors.toList()).forEach(System.out::print);
+
+        System.out.println( playOneArgument("mkyong", String::length));
+        String s = playOneArgument("mkyong", String::toUpperCase);
+        System.out.println(s);
+    }
+
+    static <R> R playOneArgument(String s1, Function<String, R> func) {
+        return func.apply(s1);
+    }
+}
+
+class MyStringUtil{
+    public static String appendBlank(String str){
+        return str+" ";
     }
 }
 
