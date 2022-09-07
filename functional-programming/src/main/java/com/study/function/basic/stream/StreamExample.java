@@ -4,10 +4,14 @@ import lombok.Data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
  * @link {https://mkyong.com/java8/java-8-stream-iterate-examples/}
+ * {https://mkyong.com/java8/java-8-filter-a-null-value-from-a-stream/}
+ *
  */
 public class StreamExample {
     public static void main(String[] args) {
@@ -32,6 +36,11 @@ public class StreamExample {
         // Stop the stream iteration if n >= 6
         Stream.iterate(1, n -> n < 6 , n -> n * 2)
             .forEach(x -> System.out.println(x));
+
+        Stream<String> language = Stream.of("java", "python", "node", null, "ruby", null, "php");
+        List<String> languageList = language.filter(Objects::nonNull).collect(Collectors.toList());
+        languageList.forEach(System.out::println);
+
     }
 }
 @Data
