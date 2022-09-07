@@ -1,4 +1,4 @@
-package com.study.function.basic;
+package com.study.function.basic.stream;
 
 import java.util.stream.IntStream;
 

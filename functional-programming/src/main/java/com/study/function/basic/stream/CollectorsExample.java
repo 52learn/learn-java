@@ -1,7 +1,8 @@
-package com.study.function.basic;
+package com.study.function.basic.stream;
 
-import lombok.Data;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
