@@ -4,7 +4,11 @@ import lombok.Data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Stream;
 
+/**
+ * @link {https://mkyong.com/java8/java-8-stream-iterate-examples/}
+ */
 public class StreamExample {
     public static void main(String[] args) {
         List<Person> persons = Arrays.asList(
@@ -21,8 +25,13 @@ public class StreamExample {
 
         System.out.println(" jack age:"+age);
 
+        Stream.iterate(0, n -> n + 1)
+            .limit(10)
+            .forEach(x -> System.out.println(x));
 
-
+        // Stop the stream iteration if n >= 6
+        Stream.iterate(1, n -> n < 6 , n -> n * 2)
+            .forEach(x -> System.out.println(x));
     }
 }
 @Data
