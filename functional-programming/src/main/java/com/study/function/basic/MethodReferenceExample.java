@@ -4,9 +4,12 @@ import lombok.Data;
 import lombok.AllArgsConstructor;
 import java.math.BigDecimal;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 /**
@@ -68,6 +71,13 @@ public class MethodReferenceExample {
         System.out.println( playOneArgument("mkyong", String::length));
         String s = playOneArgument("mkyong", String::toUpperCase);
         System.out.println(s);
+
+        // lambda
+        Supplier<Map> obj1 = () -> new HashMap();   // default HashMap() constructor
+        Map map1 = obj1.get();
+        // method reference
+        Supplier<Map> obj2 = HashMap::new;
+        Map map2 = obj2.get();
     }
 
     static <R> R playOneArgument(String s1, Function<String, R> func) {
