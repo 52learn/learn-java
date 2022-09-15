@@ -1,5 +1,8 @@
 package com.study.optional;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+
 import java.util.Optional;
 
 /**
@@ -19,8 +22,39 @@ public class OptionalExample {
         System.out.println(filterOptional);
     }
 
+    public static void flatMap(){
+        MobileService mobileService = new MobileService();
+        Mobile emptySizeMobile = new Mobile("apple","Iphone 14",Optional.empty());
+        int size = mobileService.getMobileSize(Optional.of(emptySizeMobile));
+        System.out.println(" mobile size: "+size);
+        Mobile withSizeMobile = new Mobile("apple","Iphone 14",Optional.of(new DisplayFeatures(15)));
+        System.out.println(" mobile size: "+mobileService.getMobileSize(Optional.of(withSizeMobile)));
+
+    }
+
+
+
     public static void main(String[] args) {
         map();
         filter();
+        flatMap();
+    }
+
+    static class MobileService{
+        public int getMobileSize(Optional<Mobile> mobile){
+             return mobile.flatMap(Mobile::getDisplayFeatures).map(DisplayFeatures::getSize).orElse(0);
+        }
+    }
+    @Data
+    @AllArgsConstructor
+    static class Mobile {
+        private String brand;
+        private String name;
+        Optional<DisplayFeatures> displayFeatures;
+    }
+    @Data
+    @AllArgsConstructor
+    static class DisplayFeatures{
+       private int size;
     }
 }
