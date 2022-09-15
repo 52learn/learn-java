@@ -24,11 +24,12 @@ public class OptionalExample {
 
     public static void flatMap(){
         MobileService mobileService = new MobileService();
-        Mobile emptySizeMobile = new Mobile("apple","Iphone 14",Optional.empty());
+        Mobile emptySizeMobile = new Mobile("apple","Iphone 14",Optional.empty(),null);
         int size = mobileService.getMobileSize(Optional.of(emptySizeMobile));
-        System.out.println(" mobile size: "+size);
-        Mobile withSizeMobile = new Mobile("apple","Iphone 14",Optional.of(new DisplayFeatures(15)));
-        System.out.println(" mobile size: "+mobileService.getMobileSize(Optional.of(withSizeMobile)));
+        System.out.println(" mobile size: "+size+",madePlaceCountry:"+ mobileService.getMadePlaceCountry(Optional.of(emptySizeMobile)));
+        Mobile withSizeMobile = new Mobile("apple","Iphone 14",Optional.of(new DisplayFeatures(15)),new MadePlace("China"));
+        System.out.println(" mobile size: "+mobileService.getMobileSize(Optional.of(withSizeMobile))
+            +",madePlaceCountry:"+ mobileService.getMadePlaceCountry(Optional.of(withSizeMobile)));
 
     }
 
@@ -44,17 +45,29 @@ public class OptionalExample {
         public int getMobileSize(Optional<Mobile> mobile){
              return mobile.flatMap(Mobile::getDisplayFeatures).map(DisplayFeatures::getSize).orElse(0);
         }
+
+        public String getMadePlaceCountry(Optional<Mobile> mobile){
+            return mobile.map(Mobile::getMadePlace).map(MadePlace::getCountry).orElse("");
+        }
     }
     @Data
     @AllArgsConstructor
     static class Mobile {
         private String brand;
         private String name;
-        Optional<DisplayFeatures> displayFeatures;
+        private Optional<DisplayFeatures> displayFeatures;
+        private MadePlace madePlace;
+
     }
     @Data
     @AllArgsConstructor
     static class DisplayFeatures{
        private int size;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MadePlace{
+        private String country;
     }
 }
